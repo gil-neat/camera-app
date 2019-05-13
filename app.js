@@ -3,7 +3,6 @@
 const constraints = {
   video: true
 };
-var track = null;
 
 // Define constants
 const cameraView = document.querySelector("#camera--view"),
@@ -13,11 +12,15 @@ const cameraView = document.querySelector("#camera--view"),
 
 // Access the device camera and stream to cameraView
 function cameraStart() {
-    
+    if (window.stream) {
+    window.stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+  }
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function(stream) {
-            track = stream.getTracks()[0];
+            window.stream = stream;
             cameraView.srcObject = stream;
         })
         .catch(function(error) {
