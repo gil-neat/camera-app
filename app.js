@@ -1,7 +1,7 @@
 // Set constraints for the video stream
 
 const constraints = {
-  video: true
+  video: { facingMode: { exact: "environment" } }
 };
 
 // Define constants
