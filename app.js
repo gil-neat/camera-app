@@ -1,7 +1,8 @@
 // Set constraints for the video stream
 
-const constraints = {
-  video: { facingMode: "environment" }
+var constraints = {
+  video: { facingMode: "environment" }, 
+  audio: false
 };
 
 // Define constants
@@ -15,11 +16,11 @@ function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function(stream) {
-            window.stream = stream;
             cameraView.srcObject = stream;
         })
         .catch(function(error) {
             console.error("Oops. Something is broken.", error);
+            alert(error);
         });
 }
 
@@ -30,7 +31,6 @@ cameraTrigger.onclick = function() {
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
-    // track.stop();
 };
 
 // Start the video stream when the window loads
