@@ -12,11 +12,6 @@ const cameraView = document.querySelector("#camera--view"),
 
 // Access the device camera and stream to cameraView
 function cameraStart() {
-    if (window.stream) {
-    window.stream.getTracks().forEach(function(track) {
-      track.stop();
-    });
-  }
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function(stream) {
